@@ -50,10 +50,8 @@ string recursiveFilter(vector<string> values, int i, string option) {
 void partTwo(vector<string>* values) {
     string oxygen, co2;
     int i = 0;
-    vector<string> oxygenVec(*values);
-    vector<string> co2Vec(*values);
-    oxygen = recursiveFilter(oxygenVec, i, "most");
-    co2 = recursiveFilter(co2Vec, i, "least");
+    oxygen = recursiveFilter(*values, i, "most");
+    co2 = recursiveFilter(*values, i, "least");
     int result = calculateFromBString(oxygen, co2);
     printf("Part 2: %i\n", result);
 }
