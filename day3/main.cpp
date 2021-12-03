@@ -39,19 +39,11 @@ void partOne(vector<string>* values) {
 string recursiveFilter(vector<string> values, int i, string option) {
     if (values.size() == 1) return values[0];
     vector<string> newValues;
-    if (option == "most") {
-        auto res = getMostLeast(&values, i);
-        copy_if(values.begin(), values.end(), back_inserter(newValues), [i, res](string element){
-            auto [ result, no ] = res;
-            return element[i] == result;
-        });
-    } else {
-        auto res = getMostLeast(&values, i);
-        copy_if(values.begin(), values.end(), back_inserter(newValues), [i, res](string element){
-            auto [ no, result ] = res;
-            return element[i] == result;
-        });
-    }
+    auto res = getMostLeast(&values, i);
+    copy_if(values.begin(), values.end(), back_inserter(newValues), [i, res, option](string element){
+        char result = option == "most" ? res.first : res.second;
+        return element[i] == result;
+    });
     return recursiveFilter(newValues, ++i, option);
 }
 
